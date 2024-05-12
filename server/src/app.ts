@@ -18,6 +18,22 @@ export const createApp = () => {
     app.use(express.json());
     app.use(helmet());
 
+    /**
+    * @openapi
+    * /health-check:
+    *  get:
+    *     tags:
+    *     - Health-check
+    *     description: Responds if the app is up and running
+    *     responses:
+    *       200:
+    *         description: App is up and running
+    */
+    app.get('/health-check', (req: Request, res: Response) => {
+        res.status(httpStatus.OK).send('OK');
+    });
+
+    // API Routes
     app.use("/api", router);
     app.use("/:id", redirectToLongUrl);
 
