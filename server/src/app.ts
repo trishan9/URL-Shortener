@@ -8,6 +8,7 @@ import { CustomError } from "./utils/custom-error";
 
 import config from "./config";
 import router from "./modules/main.router";
+import { redirectToLongUrl } from "./modules/url/url.controller";
 
 export const createApp = () => {
     const app: Express = express();
@@ -18,6 +19,7 @@ export const createApp = () => {
     app.use(helmet());
 
     app.use("/api", router);
+    app.use("/:id", redirectToLongUrl);
 
     // 404 handler
     app.use((_req: Request, _res: Response, next: NextFunction) => {
