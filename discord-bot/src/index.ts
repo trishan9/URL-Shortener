@@ -34,7 +34,7 @@ client.on(Events.InteractionCreate, (interaction) => {
     switch (interaction.commandName as Commands) {
         case "ping":
             interaction.reply({
-                content: "Pong Pong!"
+                content: "Pong Pong Pong!"
             })
             break;
         case "create":
