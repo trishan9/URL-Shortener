@@ -1,8 +1,11 @@
 import { Client, Events, GatewayIntentBits, Message } from "discord.js"
+import express, { Express } from "express";
 
 import config from "./config";
 import { handleCreate, handleGetProfile, handleLogin, handleRefresh, handleRegister } from "./commands/handlers";
 import type { Commands } from "./commands/commands";
+
+const app: Express = express();
 
 const client = new Client({
     intents: [
@@ -15,6 +18,7 @@ const client = new Client({
 
 client.once(Events.ClientReady, readyClient => {
     console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+    app.listen(config.app.port, () => console.log("Up and running!"));
 });
 
 client.on(Events.MessageCreate, (message: Message<boolean>) => {
@@ -55,4 +59,4 @@ client.on(Events.InteractionCreate, (interaction) => {
     }
 })
 
-client.login(config.discord.botToken);
+client.login(config.discord.botToken)

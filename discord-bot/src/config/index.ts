@@ -3,6 +3,7 @@ import { env } from "./env";
 export default {
   app: {
     isProduction: env.NODE_ENV === "production",
+    port: env.PORT
   },
   discord: {
     botToken: env.DISCORD_BOT_TOKEN,

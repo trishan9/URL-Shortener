@@ -1,4 +1,4 @@
-FROM node:19.5.0-alpine
+FROM node:latest-alpine
 
 WORKDIR /app
 
@@ -8,6 +8,6 @@ RUN yarn
 
 COPY . .
 
-EXPOSE 8000
+EXPOSE 8001
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
