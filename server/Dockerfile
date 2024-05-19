@@ -4,11 +4,10 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install -g pnpm
-RUN pnpm install
+RUN yarn
 
 COPY . .
 
 EXPOSE 8000
 
-CMD pnpm run start
+CMD yarn run start
