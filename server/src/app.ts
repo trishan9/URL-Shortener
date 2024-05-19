@@ -30,7 +30,7 @@ export const createApp = () => {
     *         description: App is up and running
     */
     app.get('/health-check', (req: Request, res: Response) => {
-        res.status(httpStatus.OK).send('OK');
+        res.status(httpStatus.OK).send('App is up and running!');
     });
 
     // API Routes
