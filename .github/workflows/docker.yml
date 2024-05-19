@@ -27,7 +27,7 @@ jobs:
       - name: Build and push server image
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./server
           file: ./server/Dockerfile
           push: true
           tags: trishan9/url-shortener:latest
@@ -35,7 +35,7 @@ jobs:
       - name: Build and push discord bot image
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./discord-bot
           file: ./discord-bot/Dockerfile
           push: true
           tags: trishan9/url-shortener-bot:latest
