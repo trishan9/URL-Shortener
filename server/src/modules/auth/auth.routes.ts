@@ -43,7 +43,7 @@ export default authRouter;
  *                type: string
  *        success:
  *          type: boolean
- * 
+ *
  *    UserInput:
  *      type: object
  *      required:
@@ -60,7 +60,7 @@ export default authRouter;
  *        password:
  *          type: string
  *          default: stringPassword123
- * 
+ *
  *    UserResponse:
  *      type: object
  *      properties:
@@ -77,7 +77,7 @@ export default authRouter;
  *                type: string
  *        success:
  *          type: boolean
- * 
+ *
  *    RefreshResponse:
  *      type: object
  *      properties:
@@ -114,7 +114,7 @@ export default authRouter;
  *        description: Conflict
  *      400:
  *        description: User with this email address already exists
- * 
+ *
  * '/api/auth/login':
  *  post:
  *     tags:
@@ -137,7 +137,7 @@ export default authRouter;
  *         description: User with this email address doesn't exist
  *       400:
  *         description: Invalid password
- * 
+ *
  * '/api/auth/me':
  *  get:
  *     tags:
@@ -156,7 +156,7 @@ export default authRouter;
  *         description: Not logged in
  *       400:
  *         description: User doesn't exists!
- * 
+ *
  * '/api/auth/refresh':
  *  get:
  *     tags:
@@ -180,3 +180,4 @@ export default authRouter;
  *       400:
  *         description: Invalid or expired token
  */
+

@@ -13,6 +13,6 @@ router.use("/user", userRouter);
 router.use("/URL", urlRouter);
 
 // Docs Rotes
-router.use('/docs', docsRouter);
+router.use("/docs", docsRouter);
 
 export default router;

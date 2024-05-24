@@ -30,7 +30,7 @@ const generate = ({ payload, type }: GenerateOptions): string => {
   return jwt.sign(payload, secret, {
     expiresIn,
     algorithm: "HS256",
-    subject: type
+    subject: type,
   });
 };
 
@@ -39,7 +39,7 @@ const verify = ({ token, type }: VerifyOptions): string | jwt.JwtPayload => {
 
   return jwt.verify(token, secret, {
     algorithms: ["HS256"],
-    subject: type
+    subject: type,
   });
 };
 

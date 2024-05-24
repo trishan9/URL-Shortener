@@ -7,7 +7,17 @@ import { createUrlSchema } from "./url.api.schema";
 
 const urlRouter = Router();
 
-urlRouter.post("/", isAuthenticated, validate(createUrlSchema), UrlController.createShortUrl)
-urlRouter.get("/analytics/:id", isAuthenticated, requireAdmin, UrlController.getAnalyticsById);
+urlRouter.post(
+  "/",
+  isAuthenticated,
+  validate(createUrlSchema),
+  UrlController.createShortUrl,
+);
+urlRouter.get(
+  "/analytics/:id",
+  isAuthenticated,
+  requireAdmin,
+  UrlController.getAnalyticsById,
+);
 
 export default urlRouter;

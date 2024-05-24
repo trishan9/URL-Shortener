@@ -9,7 +9,10 @@ import * as UserService from "@/modules/user/user.service";
 export const register = async (user: TUserSchema) => {
   const exists = await UserService.getUserByEmail(user.email);
   if (exists) {
-    throw new CustomError(httpStatus.BAD_REQUEST, "User with this email address already exists");
+    throw new CustomError(
+      httpStatus.BAD_REQUEST,
+      "User with this email address already exists",
+    );
   }
 
   const hashedPassword = await hash.generate(user.password);
@@ -24,7 +27,10 @@ export const login = async (email: string, password: string) => {
   const user = await UserService.getUserByEmail(email);
 
   if (!user) {
-    throw new CustomError(httpStatus.NOT_FOUND, "User with this email address doesn't exist");
+    throw new CustomError(
+      httpStatus.NOT_FOUND,
+      "User with this email address doesn't exist",
+    );
   }
 
   const isPasswordValid = await hash.compare(password, user.password);
@@ -35,7 +41,7 @@ export const login = async (email: string, password: string) => {
   const accessToken = token.generate({
     payload: {
       id: user._id,
-      role: user.role
+      role: user.role,
     },
     type: "access",
   });
@@ -43,14 +49,14 @@ export const login = async (email: string, password: string) => {
   const refreshToken = token.generate({
     payload: {
       id: user._id,
-      role: user.role
+      role: user.role,
     },
     type: "refresh",
   });
 
   return {
     accessToken,
-    refreshToken
+    refreshToken,
   };
 };
 
@@ -69,7 +75,7 @@ export const refresh = async (refToken: string) => {
   const accessToken = token.generate({
     payload: {
       id: tokenPayload.id,
-      role: tokenPayload.role
+      role: tokenPayload.role,
     },
     type: "access",
   });
@@ -85,4 +91,3 @@ export const getMe = async (id: string) => {
 
   return user;
 };
-

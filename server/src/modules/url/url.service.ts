@@ -1,4 +1,4 @@
-import { ulid } from 'ulid'
+import { ulid } from "ulid";
 
 import { URL } from "@/db/models/url.model";
 import { TCreateUrlSchema } from "./url.api.schema";
@@ -18,13 +18,16 @@ export const getUrlByShortId = async (id: string) => {
 };
 
 export const updateAnalytics = async (id: string) => {
-  return await URL.findOneAndUpdate({ shortenedId: id }, {
-    $push: {
-      analytics: {
-        timestamp: Date.now(),
-      }
-    }
-  });
+  return await URL.findOneAndUpdate(
+    { shortenedId: id },
+    {
+      $push: {
+        analytics: {
+          timestamp: Date.now(),
+        },
+      },
+    },
+  );
 };
 
 export const getAnalyticsById = async (id: string) => {
@@ -32,5 +35,5 @@ export const getAnalyticsById = async (id: string) => {
   return {
     totalClicks: url?.analytics.length,
     analytics: url?.analytics,
-  }
+  };
 };

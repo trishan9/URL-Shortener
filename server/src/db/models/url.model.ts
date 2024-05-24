@@ -1,22 +1,28 @@
 import { model, Schema } from "mongoose";
 
-const urlSchema = new Schema({
+const urlSchema = new Schema(
+  {
     shortenedId: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     redirectUrl: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
-    analytics: [{
+    analytics: [
+      {
         timestamp: {
-            type: Number
-        }
-    }]
-}, {
+          type: Number,
+        },
+      },
+    ],
+  },
+  {
     timestamps: true,
-})
+  },
+);
 
 export const URL = model("URL", urlSchema);
+

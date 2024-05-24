@@ -7,10 +7,15 @@ import { updateUserSchema, userQuerySchema } from "./user.api.schema";
 
 const userRouter = Router();
 
-userRouter.get("/", isAuthenticated, requireAdmin, UserController.getAllUsers)
+userRouter.get("/", isAuthenticated, requireAdmin, UserController.getAllUsers);
 
 userRouter.get("/:id", isAuthenticated, UserController.getUserById);
-userRouter.patch("/:id", validate(updateUserSchema), isAuthenticated, UserController.updateUser);
+userRouter.patch(
+  "/:id",
+  validate(updateUserSchema),
+  isAuthenticated,
+  UserController.updateUser,
+);
 userRouter.delete("/:id", isAuthenticated, UserController.deleteUser);
 
 export default userRouter;
@@ -31,8 +36,8 @@ export default userRouter;
  *        password:
  *          type: string
  *          default: stringPassword123
- * 
-*    AllUserResponse:
+ *
+ *    AllUserResponse:
  *      type: object
  *      properties:
  *        data:
@@ -81,7 +86,7 @@ export default userRouter;
  *              $ref: '#/components/schemas/AllUserResponse'
  *      404:
  *        description: User does not exists
- * 
+ *
  * '/api/user/{userId}':
  *  get:
  *     tags:
@@ -105,7 +110,7 @@ export default userRouter;
  *              $ref: '#/components/schemas/UserResponse'
  *      404:
  *        description: User does not exists
- * 
+ *
  *  patch:
  *     tags:
  *     - User
@@ -134,7 +139,7 @@ export default userRouter;
  *              $ref: '#/components/schemas/UserResponse'
  *       404:
  *         description: User with this email address doesn't exist
- * 
+ *
  *  delete:
  *     tags:
  *     - User
@@ -158,3 +163,4 @@ export default userRouter;
  *       404:
  *         description: User with this email address doesn't exist
  */
+

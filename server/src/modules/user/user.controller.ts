@@ -5,9 +5,14 @@ import * as UserService from "./user.service";
 import { CustomError } from "@/utils/custom-error";
 import { TUserQuerySchema } from "./user.api.schema";
 
-export const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+export const getAllUsers = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
-    const { page, limit, sortField, sortOrder } = req.query as unknown as TUserQuerySchema;
+    const { page, limit, sortField, sortOrder } =
+      req.query as unknown as TUserQuerySchema;
 
     const data = await UserService.getAllUsers({
       page: page ? Number(page) : undefined,
@@ -18,21 +23,28 @@ export const getAllUsers = async (req: Request, res: Response, next: NextFunctio
 
     return res.status(httpStatus.OK).json({
       success: true,
-      data
+      data,
     });
   } catch (error) {
     return next(error);
   }
 };
 
-export const getUserById = async (req: Request, res: Response, next: NextFunction) => {
+export const getUserById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { id } = req.params;
 
     const user = await UserService.getUserById(id);
 
     if (!user) {
-      throw new CustomError(httpStatus.NOT_FOUND, `User does not exists with id: ${id}`);
+      throw new CustomError(
+        httpStatus.NOT_FOUND,
+        `User does not exists with id: ${id}`,
+      );
     }
 
     return res.status(httpStatus.OK).json({
@@ -44,7 +56,11 @@ export const getUserById = async (req: Request, res: Response, next: NextFunctio
   }
 };
 
-export const updateUser = async (req: Request, res: Response, next: NextFunction) => {
+export const updateUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { id } = req.params;
 
@@ -61,7 +77,11 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
   }
 };
 
-export const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
+export const deleteUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { id } = req.params;
 

@@ -8,24 +8,33 @@ import * as UserService from "@/modules/user/user.service";
 export async function isAuthenticated(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
-    const authHeader = req.headers['authorization'];
+    const authHeader = req.headers["authorization"];
     if (!authHeader) {
-      throw new CustomError(httpStatus.UNAUTHORIZED, "No authorization header provided");
+      throw new CustomError(
+        httpStatus.UNAUTHORIZED,
+        "No authorization header provided",
+      );
     }
 
     const headerParts = authHeader.split(" ");
-    if (headerParts.length !== 2 || headerParts[0] !== 'Bearer') {
-      throw new CustomError(httpStatus.UNAUTHORIZED, "Invalid authorization header format");
+    if (headerParts.length !== 2 || headerParts[0] !== "Bearer") {
+      throw new CustomError(
+        httpStatus.UNAUTHORIZED,
+        "Invalid authorization header format",
+      );
     }
 
     const accessToken = headerParts[1];
     const decoded = token.verify({ token: accessToken, type: "access" });
 
     if (!decoded) {
-      throw new CustomError(httpStatus.UNAUTHORIZED, "Invalid or expired token")
+      throw new CustomError(
+        httpStatus.UNAUTHORIZED,
+        "Invalid or expired token",
+      );
     }
 
     res.locals.user = decoded;
@@ -39,13 +48,9 @@ export async function isAuthenticated(
   } catch (err) {
     return next(err);
   }
-};
+}
 
-export function requireAdmin(
-  _req: Request,
-  res: Response,
-  next: NextFunction,
-) {
+export function requireAdmin(_req: Request, res: Response, next: NextFunction) {
   try {
     const user = res.locals.user;
 
@@ -58,3 +63,4 @@ export function requireAdmin(
     return next(err);
   }
 }
+

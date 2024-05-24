@@ -3,7 +3,7 @@ import { env } from "./env";
 export default {
   app: {
     isProduction: env.NODE_ENV === "production",
-    port: env.PORT
+    port: env.PORT,
   },
   discord: {
     botToken: env.DISCORD_BOT_TOKEN,
@@ -11,6 +11,7 @@ export default {
     clientId: env.DISCORD_BOT_ID,
   },
   api: {
-    url: env.API_URL
-  }
+    url: env.API_URL,
+  },
 } as const;
+

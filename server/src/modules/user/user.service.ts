@@ -5,14 +5,12 @@ import { TUserSchema } from "../auth/auth.api.schema";
 import { TUpdateUserSchema, TUserQuerySchema } from "./user.api.schema";
 import { CustomError } from "@/utils/custom-error";
 
-export const getAllUsers = async (
-  {
-    page = 1,
-    limit = 10,
-    sortField = 'name',
-    sortOrder = 'desc'
-  }: TUserQuerySchema
-) => {
+export const getAllUsers = async ({
+  page = 1,
+  limit = 10,
+  sortField = "name",
+  sortOrder = "desc",
+}: TUserQuerySchema) => {
   const total = await User.countDocuments();
   const totalPages = Math.ceil(total / limit);
 
@@ -25,7 +23,7 @@ export const getAllUsers = async (
     total,
     totalPages,
     currentPage: page,
-    perPage: limit
+    perPage: limit,
   };
 };
 
@@ -43,20 +41,29 @@ export const createUser = async (user: TUserSchema) => {
     _id,
     name,
     email,
-    role
+    role,
   };
 };
 
 export const updateUser = async (id: string, user: TUpdateUserSchema) => {
   const exists = await getUserById(id);
-  if (!exists) throw new CustomError(httpStatus.BAD_REQUEST, "User with this ID not found");
+  if (!exists)
+    throw new CustomError(
+      httpStatus.BAD_REQUEST,
+      "User with this ID not found",
+    );
 
-  return await User.findByIdAndUpdate(id, user).select("-password -__v")
+  return await User.findByIdAndUpdate(id, user).select("-password -__v");
 };
 
 export const deleteUser = async (id: string) => {
   const exists = await getUserById(id);
-  if (!exists) throw new CustomError(httpStatus.BAD_REQUEST, "User with this ID not found");
+  if (!exists)
+    throw new CustomError(
+      httpStatus.BAD_REQUEST,
+      "User with this ID not found",
+    );
 
-  return await User.findByIdAndDelete(id).select("-password -__v")
+  return await User.findByIdAndDelete(id).select("-password -__v");
 };
+

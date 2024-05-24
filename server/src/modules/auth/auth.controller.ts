@@ -4,7 +4,11 @@ import httpStatus from "http-status";
 import * as AuthService from "./auth.service";
 import { CustomError } from "@/utils/custom-error";
 
-export const register = async (req: Request, res: Response, next: NextFunction) => {
+export const register = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const user = req.body;
 
@@ -12,14 +16,18 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
 
     return res.status(httpStatus.CREATED).json({
       success: true,
-      data: registeredUser
+      data: registeredUser,
     });
   } catch (err) {
     next(err);
   }
 };
 
-export const login = async (req: Request, res: Response, next: NextFunction) => {
+export const login = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { email, password } = req.body;
 
@@ -34,11 +42,18 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
   }
 };
 
-export const refresh = async (req: Request, res: Response, next: NextFunction) => {
+export const refresh = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const refToken = req.headers["x-refresh-token"];
     if (!refToken) {
-      throw new CustomError(httpStatus.BAD_REQUEST, "Refresh token is required");
+      throw new CustomError(
+        httpStatus.BAD_REQUEST,
+        "Refresh token is required",
+      );
     }
 
     const token = await AuthService.refresh(refToken as string);
@@ -52,7 +67,11 @@ export const refresh = async (req: Request, res: Response, next: NextFunction) =
   }
 };
 
-export const getMe = async (_req: Request, res: Response, next: NextFunction) => {
+export const getMe = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const user = await AuthService.getMe(res.locals.user.id);
     res.status(httpStatus.OK).json({
